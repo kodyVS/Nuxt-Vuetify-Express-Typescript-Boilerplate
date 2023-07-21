@@ -12,36 +12,36 @@ services:
       - mongodb_boilerplate:/data/db
     networks:
       - backend
-#   api:
-#     build:
-#       context: ./API
-#       dockerfile: Dockerfile.dev
-#     container_name: api
-#     restart: always
-#     environment:
-#       DB_PORT: 27017
-#       DB_HOST: docker:mongopw@mongo
-#     ports:
-#       - "3001:3001"
-#     command: "npm run dev"
-#     networks:
-#       - backend
-#     links:
-#       - mongo
-#     depends_on:
-#       - mongo
-#   frontend:
-#     build: ./Frontend/
-#     container_name: frontend
-#     restart: always
-#     ports:
-#       - "3000:3000"
-#       - "3005:3005"
-#     command: "npm run dev"
-#     environment:
-#       NUXT_PUBLIC_API_BASE: http://localhost:3001/api/v1
-#     depends_on:
-#       - api
+  api:
+    build:
+      context: ./API
+      dockerfile: Dockerfile.dev
+    container_name: api
+    restart: always
+    environment:
+      DB_PORT: 27017
+      DB_HOST: docker:mongopw@mongo
+    ports:
+      - "3001:3001"
+    command: "npm run dev"
+    networks:
+      - backend
+    links:
+      - mongo
+    depends_on:
+      - mongo
+  frontend:
+    build: ./Frontend/
+    container_name: frontend
+    restart: always
+    ports:
+      - "3000:3000"
+      - "3005:3005"
+    command: "npm run dev"
+    environment:
+      NUXT_PUBLIC_API_BASE: http://localhost:3001/api/v1
+    depends_on:
+      - api
 volumes:
   mongodb_boilerplate:
 networks:
